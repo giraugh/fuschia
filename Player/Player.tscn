@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/PlayerSword.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleMesh" id=1]
+mid_height = 2.2
+
+[sub_resource type="CapsuleShape" id=2]
+height = 2.2
+
+[node name="Player" type="Spatial"]
+
+[node name="Player" type="KinematicBody" parent="."]
+collision_layer = 2
+script = ExtResource( 1 )
+jump_power = 25.0
+
+[node name="Sword" parent="Player" instance=ExtResource( 2 )]
+transform = Transform( -0.913428, 0.0204861, 0.406484, 0.198354, 0.894503, 0.400649, -0.355393, 0.446592, -0.821128, 0.802877, -0.37345, 2.03096 )
+
+[node name="CameraPivot" type="Spatial" parent="Player"]
+
+[node name="CameraBoom" type="SpringArm" parent="Player/CameraPivot"]
+spring_length = 8.0
+
+[node name="Camera" type="Camera" parent="Player/CameraPivot/CameraBoom"]
+near = 0.01
+
+[node name="MeshInstance" type="MeshInstance" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
